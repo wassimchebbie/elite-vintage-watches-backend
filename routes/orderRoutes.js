@@ -1,10 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const { createOrder, getOrders, removeOrderItem, checkoutOrder } = require('../controllers/orderController');
+const initModels = require('../models');
 
-router.post('/', createOrder);           // Add item to cart
-router.get('/', getOrders);              // Fetch cart
-router.delete('/:orderId/items/:itemId', removeOrderItem); // Remove item
-router.post('/checkout', checkoutOrder); // Checkout
+let Order;
+(async () => {
+  const models = await initModels();
+  Order = models.Order;
+})();
+
+router.get('/', async (req, res) => {
+  try {
+    const orders = await Order.findAll();
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch orders' });
+  }
+});
 
 module.exports = router;
