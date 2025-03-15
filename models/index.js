@@ -1,3 +1,4 @@
+// backend/models/index.js
 const { Sequelize, DataTypes } = require('sequelize');
 const connectDB = require('../config/db');
 
@@ -16,17 +17,15 @@ const initModels = async () => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    // Add other fields
   });
 
   const Order = sequelize.define('Order', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     userId: DataTypes.INTEGER,
     total: DataTypes.FLOAT,
-    // Add other fields
   });
 
-  await sequelize.sync(); // Creates tables
+  await sequelize.sync();
   return { Product, User, Order, sequelize };
 };
 

@@ -1,3 +1,4 @@
+// backend/server.js
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -5,11 +6,10 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 
-dotenv.config(); // Load .env file
+dotenv.config();
 
 const app = express();
 
-// Connect to PostgreSQL and get sequelize instance
 let sequelize;
 const startServer = async () => {
   sequelize = await connectDB();

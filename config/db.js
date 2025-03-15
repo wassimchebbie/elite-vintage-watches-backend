@@ -1,3 +1,4 @@
+// backend/config/db.js
 const { Sequelize } = require('sequelize');
 
 const connectDB = async () => {
@@ -7,10 +8,10 @@ const connectDB = async () => {
   });
 
   try {
-    console.log('Attempting to connect to:', process.env.DATABASE_URL); // Debug
+    console.log('Attempting to connect to:', process.env.DATABASE_URL);
     await sequelize.authenticate();
     console.log('PostgreSQL connected');
-    return sequelize; // Return the sequelize instance for models
+    return sequelize;
   } catch (error) {
     console.error('PostgreSQL connection error:', error);
     process.exit(1);
