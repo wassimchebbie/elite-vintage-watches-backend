@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const connectDB = require('../config/db');
 
 const initModels = async () => {
@@ -12,20 +12,15 @@ const initModels = async () => {
     image: DataTypes.STRING,
   });
 
-  const User = sequelize.define('User', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-  });
+  // Seed sample data
+  await sequelize.sync({ force: true }); // Resets table (use cautiously)
+  await Product.bulkCreate([
+    { name: 'Vintage Gold Watch', price: 100.00, description: 'A classic gold watch', image: 'gold-watch.jpg' },
+    { name: 'Silver Chronograph', price: 150.00, description: 'A sleek silver watch', image: 'silver-watch.jpg' },
+  ]);
+  console.log('Sample data seeded');
 
-  const Order = sequelize.define('Order', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    userId: DataTypes.INTEGER,
-    total: DataTypes.FLOAT,
-  });
-
-  await sequelize.sync();
-  return { Product, User, Order, sequelize };
+  return { Product };
 };
 
-module.exports = initModels();
+module.exports = initModels;

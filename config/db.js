@@ -1,13 +1,12 @@
 const { Sequelize } = require('sequelize');
 
 const connectDB = async () => {
-  const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:5432/golden-time', {
+  const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     logging: false,
   });
 
   try {
-    console.log('Attempting to connect to:', process.env.DATABASE_URL);
     await sequelize.authenticate();
     console.log('PostgreSQL connected');
     return sequelize;

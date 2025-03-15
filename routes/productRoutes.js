@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const initModels = require('../models');
-let Product;
 
+let Product;
 (async () => {
   const models = await initModels();
   Product = models.Product;
