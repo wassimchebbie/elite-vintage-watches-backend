@@ -1,4 +1,3 @@
-// backend/models/index.js
 const { Sequelize, DataTypes } = require('sequelize');
 const connectDB = require('../config/db');
 
