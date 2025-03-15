@@ -12,7 +12,7 @@ const initModels = async () => {
     image: DataTypes.STRING,
   });
 
-  // Seed sample data
+
   await sequelize.sync({ force: true }); // Resets table (use cautiously)
   await Product.bulkCreate([
     { name: 'Vintage Gold Watch', price: 100.00, description: 'A classic gold watch', image: 'gold-watch.jpg' },
