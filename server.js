@@ -9,11 +9,16 @@ dotenv.config(); // Load .env file
 
 const app = express();
 
-connectDB();
+// Connect to PostgreSQL and get sequelize instance
+let sequelize;
+const startServer = async () => {
+  sequelize = await connectDB();
+};
+startServer();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://golden-time-frontend.vercel.app'],
-  optionsSuccessStatus: 200
+  origin: ['http://localhost:3000', 'https://elite-vintage-watches-frontend.onrender.com'],
+  optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
