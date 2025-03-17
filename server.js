@@ -11,8 +11,17 @@ const app = express();
 
 let sequelize;
 const startServer = async () => {
-  sequelize = await connectDB();
+  try {
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL environment variable is not set');
+    }
+    sequelize = await connectDB();
+  } catch (error) {
+    console.error('Failed to start server:', error.message);
+    process.exit(1);
+  }
 };
+
 startServer();
 
 const corsOptions = {
@@ -20,8 +29,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
 
+app.use(bodyParser.json());
 app.use('/images', express.static('public/images'));
 
 app.use('/api/users', require('./routes/userRoutes'));
