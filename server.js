@@ -25,7 +25,7 @@ const startServer = async () => {
 startServer();
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://elite-vintage-watches-frontend.onrender.com'],
+  origin: ['http://localhost:3000', 'https://your-frontend.onrender.com'], // Replace with your frontend URL
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));

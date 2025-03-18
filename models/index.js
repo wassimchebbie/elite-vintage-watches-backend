@@ -18,15 +18,13 @@ const initModels = async () => {
     total: DataTypes.FLOAT,
   });
 
-  // Sync without dropping tables
   await sequelize.sync();
 
-  // Seed data only if tables are empty
   const productCount = await Product.count();
   if (productCount === 0) {
     await Product.bulkCreate([
-      { name: 'Vintage Gold Watch', price: 100.00, description: 'A classic gold watch', image: 'gold-watch.jpg' },
-      { name: 'Silver Chronograph', price: 150.00, description: 'A sleek silver watch', image: 'silver-watch.jpg' },
+      { name: 'Vintage Gold Watch', price: 100.00, description: 'A classic gold watch', image: '/images/gold-watch.jpg' },
+      { name: 'Silver Chronograph', price: 150.00, description: 'A sleek silver watch', image: '/images/silver-watch.jpg' },
     ]);
     console.log('Sample products seeded');
   }
